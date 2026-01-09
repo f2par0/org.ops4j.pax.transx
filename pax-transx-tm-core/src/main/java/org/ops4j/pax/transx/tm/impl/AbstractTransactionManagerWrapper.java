@@ -20,19 +20,19 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 import java.util.function.Consumer;
-import javax.transaction.RollbackException;
-import javax.transaction.Synchronization;
-import javax.transaction.SystemException;
+import jakarta.transaction.RollbackException;
+import jakarta.transaction.Synchronization;
+import jakarta.transaction.SystemException;
 
 import org.ops4j.pax.transx.tm.NamedResource;
 import org.ops4j.pax.transx.tm.Status;
 import org.ops4j.pax.transx.tm.Transaction;
 import org.ops4j.pax.transx.tm.TransactionManager;
 
-public abstract class AbstractTransactionManagerWrapper<TM extends javax.transaction.TransactionManager> implements TransactionManager {
+public abstract class AbstractTransactionManagerWrapper<TM extends jakarta.transaction.TransactionManager> implements TransactionManager {
 
     protected final TM tm;
-    protected final Map<javax.transaction.Transaction, TransactionWrapper> transactions = new WeakHashMap<>();
+    protected final Map<jakarta.transaction.Transaction, TransactionWrapper> transactions = new WeakHashMap<>();
 
     public AbstractTransactionManagerWrapper(TM tm) {
         this.tm = tm;
@@ -41,7 +41,7 @@ public abstract class AbstractTransactionManagerWrapper<TM extends javax.transac
     @Override
     public Transaction getTransaction() {
         try {
-            javax.transaction.Transaction jtx = tm.getTransaction();
+            jakarta.transaction.Transaction jtx = tm.getTransaction();
             if (jtx == null) {
                 return null;
             }
@@ -60,7 +60,7 @@ public abstract class AbstractTransactionManagerWrapper<TM extends javax.transac
         return getTransaction();
     }
 
-    protected TransactionWrapper doCreateTransactionWrapper(javax.transaction.Transaction tx) {
+    protected TransactionWrapper doCreateTransactionWrapper(jakarta.transaction.Transaction tx) {
         return new TransactionWrapper(tx);
     }
 
@@ -72,17 +72,17 @@ public abstract class AbstractTransactionManagerWrapper<TM extends javax.transac
 
     protected class TransactionWrapper implements Transaction {
 
-        final WeakReference<javax.transaction.Transaction> transactionWr;
+        final WeakReference<jakarta.transaction.Transaction> transactionWr;
         boolean suspended;
 
-        public TransactionWrapper(javax.transaction.Transaction transaction) {
+        public TransactionWrapper(jakarta.transaction.Transaction transaction) {
             this.transactionWr = new WeakReference<>(Objects.requireNonNull(transaction, "transaction should not be null"));
             if (isActive()) {
                 synchronization(null, st -> disassociate());
             }
         }
 
-        protected javax.transaction.Transaction getTransaction() throws SystemException {
+        protected jakarta.transaction.Transaction getTransaction() throws SystemException {
             //should not return null for active transaction. May be check for null and throw IllegalStateException?
             return transactionWr.get();
         }
@@ -94,7 +94,7 @@ public abstract class AbstractTransactionManagerWrapper<TM extends javax.transac
 
         @Override
         public void suspend() throws Exception {
-            javax.transaction.Transaction tx = tm.suspend();
+            jakarta.transaction.Transaction tx = tm.suspend();
             if (tx != getTransaction()) {
                 throw new IllegalStateException();
             }
@@ -103,7 +103,7 @@ public abstract class AbstractTransactionManagerWrapper<TM extends javax.transac
 
         @Override
         public void resume() throws Exception {
-            javax.transaction.Transaction tx = tm.getTransaction();
+            jakarta.transaction.Transaction tx = tm.getTransaction();
             if (tx != null) {
                 throw new IllegalStateException();
             }
@@ -196,21 +196,21 @@ public abstract class AbstractTransactionManagerWrapper<TM extends javax.transac
 
     protected static Status toStatus(int status) {
         switch (status) {
-            case javax.transaction.Status.STATUS_ACTIVE:
+            case jakarta.transaction.Status.STATUS_ACTIVE:
                 return Status.ACTIVE;
-            case javax.transaction.Status.STATUS_MARKED_ROLLBACK:
+            case jakarta.transaction.Status.STATUS_MARKED_ROLLBACK:
                 return Status.MARKED_ROLLBACK;
-            case javax.transaction.Status.STATUS_PREPARED:
+            case jakarta.transaction.Status.STATUS_PREPARED:
                 return Status.PREPARED;
-            case javax.transaction.Status.STATUS_COMMITTED:
+            case jakarta.transaction.Status.STATUS_COMMITTED:
                 return Status.COMMITTED;
-            case javax.transaction.Status.STATUS_ROLLEDBACK:
+            case jakarta.transaction.Status.STATUS_ROLLEDBACK:
                 return Status.ROLLED_BACK;
-            case javax.transaction.Status.STATUS_PREPARING:
+            case jakarta.transaction.Status.STATUS_PREPARING:
                 return Status.PREPARING;
-            case javax.transaction.Status.STATUS_COMMITTING:
+            case jakarta.transaction.Status.STATUS_COMMITTING:
                 return Status.COMMITTING;
-            case javax.transaction.Status.STATUS_ROLLING_BACK:
+            case jakarta.transaction.Status.STATUS_ROLLING_BACK:
                 return Status.ROLLING_BACK;
             default:
                 return Status.NO_TRANSACTION;

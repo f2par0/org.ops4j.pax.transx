@@ -45,7 +45,9 @@ public class AssertionAppender extends AbstractAppender {
 
     @Override
     public void append(LogEvent event) {
-        MESSAGES.put(event.getMessage().getFormattedMessage(), event);
+        if (capture) {
+            MESSAGES.put(event.getMessage().getFormattedMessage(), event);
+        }
     }
 
     @PluginFactory

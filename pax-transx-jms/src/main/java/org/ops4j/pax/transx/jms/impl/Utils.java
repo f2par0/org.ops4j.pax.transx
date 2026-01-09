@@ -16,27 +16,27 @@
 package org.ops4j.pax.transx.jms.impl;
 
 import java.util.Set;
-import javax.jms.IllegalStateRuntimeException;
-import javax.jms.InvalidClientIDException;
-import javax.jms.InvalidClientIDRuntimeException;
-import javax.jms.InvalidDestinationException;
-import javax.jms.InvalidDestinationRuntimeException;
-import javax.jms.InvalidSelectorException;
-import javax.jms.InvalidSelectorRuntimeException;
-import javax.jms.JMSException;
-import javax.jms.JMSRuntimeException;
-import javax.jms.JMSSecurityException;
-import javax.jms.JMSSecurityRuntimeException;
-import javax.jms.MessageFormatException;
-import javax.jms.MessageFormatRuntimeException;
-import javax.jms.MessageNotWriteableException;
-import javax.jms.MessageNotWriteableRuntimeException;
-import javax.jms.ResourceAllocationException;
-import javax.jms.ResourceAllocationRuntimeException;
-import javax.jms.TransactionInProgressException;
-import javax.jms.TransactionInProgressRuntimeException;
-import javax.jms.TransactionRolledBackException;
-import javax.jms.TransactionRolledBackRuntimeException;
+import jakarta.jms.IllegalStateRuntimeException;
+import jakarta.jms.InvalidClientIDException;
+import jakarta.jms.InvalidClientIDRuntimeException;
+import jakarta.jms.InvalidDestinationException;
+import jakarta.jms.InvalidDestinationRuntimeException;
+import jakarta.jms.InvalidSelectorException;
+import jakarta.jms.InvalidSelectorRuntimeException;
+import jakarta.jms.JMSException;
+import jakarta.jms.JMSRuntimeException;
+import jakarta.jms.JMSSecurityException;
+import jakarta.jms.JMSSecurityRuntimeException;
+import jakarta.jms.MessageFormatException;
+import jakarta.jms.MessageFormatRuntimeException;
+import jakarta.jms.MessageNotWriteableException;
+import jakarta.jms.MessageNotWriteableRuntimeException;
+import jakarta.jms.ResourceAllocationException;
+import jakarta.jms.ResourceAllocationRuntimeException;
+import jakarta.jms.TransactionInProgressException;
+import jakarta.jms.TransactionInProgressRuntimeException;
+import jakarta.jms.TransactionRolledBackException;
+import jakarta.jms.TransactionRolledBackRuntimeException;
 
 final class Utils {
 
@@ -51,7 +51,7 @@ final class Utils {
     }
 
     public static JMSRuntimeException convertToRuntimeException(JMSException e) {
-        if (e instanceof javax.jms.IllegalStateException) {
+        if (e instanceof jakarta.jms.IllegalStateException) {
             return new IllegalStateRuntimeException(e.getMessage(), e.getErrorCode(), e);
         }
         if (e instanceof InvalidClientIDException) {

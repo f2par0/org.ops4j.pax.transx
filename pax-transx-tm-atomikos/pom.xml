@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.ops4j.pax.transx</groupId>
         <artifactId>pax-transx</artifactId>
-        <version>0.5.5-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -38,6 +38,8 @@
             <groupId>org.ops4j.pax.transx</groupId>
             <artifactId>pax-transx-tm-core</artifactId>
         </dependency>
+
+        <!-- APIs -->
 
         <!-- OSGi -->
 
@@ -57,6 +59,7 @@
         <dependency>
             <groupId>com.atomikos</groupId>
             <artifactId>transactions-jta</artifactId>
+            <classifier>jakarta</classifier>
         </dependency>
         <dependency>
             <groupId>com.atomikos</groupId>
@@ -109,12 +112,13 @@
                     <instructions>
                         <Import-Package>
                             !com.atomikos.logging,
-                            javax.transaction;version="[1.1,2)",
+                            !javax.transaction,
+                            jakarta.transaction;version="[2.0,3)",
                             javax.transaction.xa;version=!,
-                            javax.jms;resolution:=optional,
-                            javax.sql;resolution:=optional,
+                            jakarta.jms;resolution:=optional,
+                            jakarta.sql;resolution:=optional,
                             org.slf4j;resolution:=optional,
-                            javax.management;resolution:=optional,
+                            jakarta.management;resolution:=optional,
                             org.apache.log4j;resolution:=optional,
                             org.apache.logging.log4j;resolution:=optional,
                             *
@@ -133,8 +137,8 @@
                             org.ops4j.pax.transx.tm.impl.atomikos.Activator
                         </Bundle-Activator>
                         <Provide-Capability>
-                            osgi.service;objectClass="javax.transaction.TransactionManager",
-                            osgi.service;objectClass="javax.transaction.UserTransaction",
+                            osgi.service;objectClass="jakarta.transaction.TransactionManager",
+                            osgi.service;objectClass="jakarta.transaction.UserTransaction",
                             osgi.service;objectClass="org.ops4j.pax.transx.tm.TransactionManager",
                         </Provide-Capability>
                     </instructions>

@@ -15,7 +15,7 @@
  */
 package org.ops4j.pax.transx.jdbc.bench;
 
-import javax.resource.spi.TransactionSupport;
+import jakarta.resource.spi.TransactionSupport;
 import javax.sql.DataSource;
 
 import org.openjdk.jmh.annotations.Level;

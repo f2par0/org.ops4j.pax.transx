@@ -56,7 +56,7 @@ public class GeronimoTest {
         try {
             tm.getTransaction().commit();
             fail("Expected a RollbackException");
-        } catch (javax.transaction.RollbackException e) {
+        } catch (jakarta.transaction.RollbackException e) {
             // expected, ignore
         }
 

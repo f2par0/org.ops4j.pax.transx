@@ -51,12 +51,7 @@ public class GeronimoRecoveryTest extends AbstractControlledTestBase {
     @Configuration
     public Option[] config() throws Exception {
         return combine(baseConfigure(),
-                mavenBundle("javax.transaction", "javax.transaction-api").versionAsInProject(),
-                mavenBundle("javax.interceptor", "javax.interceptor-api").versionAsInProject(),
-                mavenBundle("jakarta.el", "jakarta.el-api").versionAsInProject(),
-                mavenBundle("javax.enterprise", "cdi-api").versionAsInProject(),
-                jcaApiBundle(),
-                mavenBundle("javax.jms", "javax.jms-api").versionAsInProject(),
+                jakartaBundles(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-tm-api").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-tm-geronimo").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-connector").versionAsInProject(),

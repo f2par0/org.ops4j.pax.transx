@@ -30,6 +30,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.ops4j.pax.exam.CoreOptions;
 import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.options.CompositeOption;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.ops4j.pax.logging.PaxLoggingConstants;
@@ -57,7 +58,6 @@ import static org.ops4j.pax.exam.OptionUtils.combine;
 public class AbstractControlledTestBase {
 
     public static final Logger LOG = LoggerFactory.getLogger("org.ops4j.pax.transx.itest");
-    public static final String PROBE_SYMBOLIC_NAME = "PaxExam-Probe";
 
     // location of where pax-logging-api will have output file written according to
     // "org.ops4j.pax.logging.useFileLogFallback" system/context property
@@ -98,7 +98,8 @@ public class AbstractControlledTestBase {
 
         Option[] baseOptions = new Option[] {
                 // basic options (see https://issues.apache.org/jira/browse/FELIX-6184)
-                bootDelegationPackages("sun.*", "com.sun.*", "javax.transaction.xa", "javax.security.*", "jdk.internal.reflect.*", "jdk.internal.reflect"),
+                // https://github.com/mockito/mockito/issues/2203
+                bootDelegationPackages("org.mockito.internal.creation.bytebuddy.inject", "sun.*", "com.sun.*", "javax.transaction.xa", "javax.security.*", "jdk.internal.reflect.*", "jdk.internal.reflect"),
                 systemPackage("javax.transaction.xa;version=\"1.2\""),
 
                 frameworkStartLevel(START_LEVEL_TEST_BUNDLE),
@@ -128,6 +129,8 @@ public class AbstractControlledTestBase {
                 linkBundle("org.apache.servicemix.bundles.javax-inject").startLevel(START_LEVEL_SYSTEM_BUNDLES),
 
                 junitBundles(),
+                //systemProperty("java.protocol.handler.pkgs").value("org.ops4j.pax.url"),
+                systemProperty("pax.exam.osgi.unresolved.fail").value("false"),
                 mavenBundle("org.mockito", "mockito-core")
                         .versionAsInProject().startLevel(START_LEVEL_TEST_BUNDLE - 1),
                 mavenBundle("net.bytebuddy", "byte-buddy")
@@ -180,8 +183,24 @@ public class AbstractControlledTestBase {
     }
 
     protected Option jcaApiBundle() {
-//        return mavenBundle("javax.resource", "javax.resource-api").versionAsInProject();
-        return mavenBundle("org.apache.geronimo.specs", "geronimo-j2ee-connector_1.6_spec").versionAsInProject();
+        return mavenBundle("jakarta.resource", "jakarta.resource-api").versionAsInProject();
+    }
+
+    /**
+     * Returns common Jakarta API bundles used across tests.
+     * @return composite option containing Jakarta API bundle options
+     */
+    protected CompositeOption jakartaBundles() {
+        return CoreOptions.composite(
+                mavenBundle("jakarta.transaction", "jakarta.transaction-api").versionAsInProject(),
+                mavenBundle("jakarta.interceptor", "jakarta.interceptor-api").versionAsInProject(),
+                mavenBundle("jakarta.el", "jakarta.el-api").versionAsInProject(),
+                mavenBundle("jakarta.enterprise", "jakarta.enterprise.cdi-api").versionAsInProject(),
+                mavenBundle("jakarta.enterprise", "jakarta.enterprise.lang-model").versionAsInProject(),
+                mavenBundle("jakarta.inject", "jakarta.inject-api").versionAsInProject(),
+                jcaApiBundle(),
+                mavenBundle("jakarta.jms", "jakarta.jms-api").versionAsInProject()
+        );
     }
 
 }

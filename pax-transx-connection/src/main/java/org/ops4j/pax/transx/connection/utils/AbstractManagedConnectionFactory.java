@@ -19,12 +19,12 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashSet;
 import java.util.Set;
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.InvalidPropertyException;
-import javax.resource.spi.ManagedConnection;
-import javax.resource.spi.TransactionSupport;
-import javax.resource.spi.ValidatingManagedConnectionFactory;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.InvalidPropertyException;
+import jakarta.resource.spi.ManagedConnection;
+import jakarta.resource.spi.TransactionSupport;
+import jakarta.resource.spi.ValidatingManagedConnectionFactory;
 import javax.security.auth.Subject;
 
 import org.ops4j.pax.transx.connection.ExceptionSorter;

@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.ops4j.pax.transx</groupId>
         <artifactId>pax-transx</artifactId>
-        <version>0.5.5-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -31,8 +31,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.resource</groupId>
-            <artifactId>javax.resource-api</artifactId>
+            <groupId>jakarta.resource</groupId>
+            <artifactId>jakarta.resource-api</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

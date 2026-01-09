@@ -17,9 +17,9 @@ package org.ops4j.pax.transx.connection.utils;
 
 import java.util.Arrays;
 import java.util.Set;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.ResourceAdapterInternalException;
-import javax.resource.spi.security.PasswordCredential;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ResourceAdapterInternalException;
+import jakarta.resource.spi.security.PasswordCredential;
 import javax.security.auth.Subject;
 
 public class CredentialExtractor {

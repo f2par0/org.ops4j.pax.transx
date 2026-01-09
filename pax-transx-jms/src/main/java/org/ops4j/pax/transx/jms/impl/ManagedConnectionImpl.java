@@ -15,15 +15,15 @@
  */
 package org.ops4j.pax.transx.jms.impl;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionMetaData;
-import javax.jms.JMSException;
-import javax.jms.Session;
-import javax.jms.XAConnection;
-import javax.jms.XASession;
-import javax.resource.ResourceException;
-import javax.resource.spi.LocalTransaction;
-import javax.resource.spi.ManagedConnection;
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionMetaData;
+import jakarta.jms.JMSException;
+import jakarta.jms.Session;
+import jakarta.jms.XAConnection;
+import jakarta.jms.XASession;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.LocalTransaction;
+import jakarta.resource.spi.ManagedConnection;
 import javax.security.auth.Subject;
 
 import org.ops4j.pax.transx.connection.ExceptionSorter;

@@ -18,8 +18,8 @@ package org.ops4j.pax.transx.tm.impl.atomikos;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
-import javax.transaction.TransactionManager;
-import javax.transaction.UserTransaction;
+import jakarta.transaction.TransactionManager;
+import jakarta.transaction.UserTransaction;
 
 import com.atomikos.icatch.config.Configuration;
 import com.atomikos.icatch.config.UserTransactionService;

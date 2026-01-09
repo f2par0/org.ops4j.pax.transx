@@ -17,7 +17,7 @@ package org.ops4j.pax.transx.itests;
 
 import java.util.Properties;
 import javax.inject.Inject;
-import javax.resource.spi.TransactionSupport;
+import jakarta.resource.spi.TransactionSupport;
 import javax.sql.DataSource;
 import javax.sql.XADataSource;
 
@@ -34,6 +34,7 @@ import org.osgi.service.jdbc.DataSourceFactory;
 import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.systemProperty;
+import static org.ops4j.pax.exam.CoreOptions.wrappedBundle;
 import static org.ops4j.pax.exam.OptionUtils.combine;
 
 @RunWith(PaxExam.class)
@@ -49,12 +50,7 @@ public class NarayanaTest extends AbstractControlledTestBase {
     @Configuration
     public Option[] config() throws Exception {
         return combine(baseConfigure(),
-                mavenBundle("javax.transaction", "javax.transaction-api").versionAsInProject(),
-                mavenBundle("javax.interceptor", "javax.interceptor-api").versionAsInProject(),
-                mavenBundle("jakarta.el", "jakarta.el-api").versionAsInProject(),
-                mavenBundle("javax.enterprise", "cdi-api").versionAsInProject(),
-                jcaApiBundle(),
-                mavenBundle("javax.jms", "javax.jms-api").versionAsInProject(),
+                jakartaBundles(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-tm-api").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-tm-narayana").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-connector").versionAsInProject(),
@@ -62,6 +58,8 @@ public class NarayanaTest extends AbstractControlledTestBase {
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-jdbc").versionAsInProject(),
                 mavenBundle("org.osgi", "org.osgi.service.jdbc").versionAsInProject(),
                 mavenBundle("com.h2database", "h2").versionAsInProject(),
+                wrappedBundle(mavenBundle("org.jboss.narayana.jta", "narayana-jta").versionAsInProject()),
+                wrappedBundle(mavenBundle("org.jboss.narayana.jts", "narayana-jts-integration").versionAsInProject()),
                 systemProperty("com.arjuna.ats.arjuna.recovery.periodicRecoveryInitilizationOffset").value("1"),
                 systemProperty("com.arjuna.ats.arjuna.hornetqjournal.asyncIO").value("false")
         );

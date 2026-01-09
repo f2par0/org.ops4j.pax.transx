@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ops4j.pax.transx.connection.utils;
+package org.jboss.narayana.osgi.jta;
+
+import javax.management.MBeanException;
+import java.util.List;
 
 
-import jakarta.resource.spi.ConnectionRequestInfo;
+public interface ObjStoreBrowserService {
+    void probe() throws MBeanException;
+    List<String> types();
+    boolean select(String itype);
+    void list(String itype);
 
-public interface UserPasswordConnectionRequestInfo extends ConnectionRequestInfo {
+    void attach(String id);
+    void detach();
+    void forget(int idx);
+    void delete(int idx);
 
-    /**
-     * Return the user name used to establish the connection.
-     *
-     * @return the user name used to establish the connection
-     */
-    String getUserName();
-
-    /**
-     * Return the password credential used to establish the connection.
-     *
-     * @return the password credential used to establish the connection
-     */
-    String getPassword();
-
+    void start();
+    void stop();
 }

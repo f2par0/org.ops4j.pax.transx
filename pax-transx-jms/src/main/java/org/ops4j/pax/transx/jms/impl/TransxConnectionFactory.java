@@ -15,12 +15,12 @@
  */
 package org.ops4j.pax.transx.jms.impl;
 
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.Session;
-import javax.jms.TopicConnectionFactory;
-import javax.resource.spi.ConnectionManager;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+import jakarta.jms.QueueConnectionFactory;
+import jakarta.jms.Session;
+import jakarta.jms.TopicConnectionFactory;
+import jakarta.resource.spi.ConnectionManager;
 
 import org.ops4j.pax.transx.connection.utils.SimpleConnectionManager;
 

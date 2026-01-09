@@ -16,10 +16,10 @@
 package org.ops4j.pax.transx.connector;
 
 import java.util.logging.Logger;
-import javax.resource.spi.ConnectionManager;
-import javax.resource.spi.ManagedConnectionFactory;
-import javax.resource.spi.TransactionSupport;
-import javax.resource.spi.TransactionSupport.TransactionSupportLevel;
+import jakarta.resource.spi.ConnectionManager;
+import jakarta.resource.spi.ManagedConnectionFactory;
+import jakarta.resource.spi.TransactionSupport;
+import jakarta.resource.spi.TransactionSupport.TransactionSupportLevel;
 
 import org.ops4j.pax.transx.connector.impl.GenericConnectionManager;
 import org.ops4j.pax.transx.tm.TransactionManager;

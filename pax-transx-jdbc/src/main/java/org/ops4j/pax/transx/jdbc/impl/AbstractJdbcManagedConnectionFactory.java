@@ -18,11 +18,11 @@ package org.ops4j.pax.transx.jdbc.impl;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionManager;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.InvalidPropertyException;
-import javax.resource.spi.ResourceAdapterInternalException;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ConnectionManager;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.InvalidPropertyException;
+import jakarta.resource.spi.ResourceAdapterInternalException;
 import javax.sql.CommonDataSource;
 
 import org.ops4j.pax.transx.connection.ExceptionSorter;

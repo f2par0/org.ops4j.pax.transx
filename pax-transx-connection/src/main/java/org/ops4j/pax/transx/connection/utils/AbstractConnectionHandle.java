@@ -15,7 +15,7 @@
  */
 package org.ops4j.pax.transx.connection.utils;
 
-import javax.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ConnectionRequestInfo;
 
 public abstract class AbstractConnectionHandle<
         MCF extends AbstractManagedConnectionFactory<MCF, MC, C, CI>,

@@ -17,7 +17,7 @@ package org.ops4j.pax.transx.tm.impl.atomikos;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.transaction.TransactionManager;
+import jakarta.transaction.TransactionManager;
 import javax.transaction.xa.XAResource;
 
 import com.atomikos.datasource.ResourceException;

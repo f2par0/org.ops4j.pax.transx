@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.ops4j.pax.transx</groupId>
         <artifactId>pax-transx</artifactId>
-        <version>0.5.5-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -57,12 +57,12 @@
         <!-- APIs -->
 
         <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>javax.jms-api</artifactId>
+            <groupId>jakarta.jms</groupId>
+            <artifactId>jakarta.jms-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>javax.transaction-api</artifactId>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
         </dependency>
 
         <!-- Apache components -->
@@ -102,6 +102,11 @@
         <!-- Test dependencies -->
 
         <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -136,8 +141,9 @@
                         <Import-Package>
                             org.ops4j.pax.transx.connection,
                             javax.transaction.xa;version=!,
-                            javax.resource;version="[1.6,2)",
-                            javax.resource.*;version="[1.6,2)",
+                            jakarta.resource;version="[2.1,3)",
+                            jakarta.resource.*;version="[2.1,3)",
+                            jakarta.jms;version="[3.1,4)",
                             *
                         </Import-Package>
                         <Private-Package>

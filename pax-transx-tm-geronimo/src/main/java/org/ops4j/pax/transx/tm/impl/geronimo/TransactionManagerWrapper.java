@@ -18,7 +18,9 @@ package org.ops4j.pax.transx.tm.impl.geronimo;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
-import javax.transaction.SystemException;
+
+import jakarta.transaction.SystemException;
+import jakarta.transaction.TransactionManager;
 
 import org.apache.geronimo.transaction.manager.GeronimoTransactionManager;
 import org.apache.geronimo.transaction.manager.NamedXAResource;
@@ -85,7 +87,7 @@ public class TransactionManagerWrapper extends AbstractTransactionManagerWrapper
     }
 
     @Override
-    protected TransactionWrapper doCreateTransactionWrapper(javax.transaction.Transaction tx) {
+    protected TransactionWrapper doCreateTransactionWrapper(jakarta.transaction.Transaction tx) {
         return new GeronimoTransactionWrapper(tx);
     }
 
@@ -94,7 +96,7 @@ public class TransactionManagerWrapper extends AbstractTransactionManagerWrapper
         LastResource last;
         private final Map<NamedResource, NamedXAResource> resources = new IdentityHashMap<>();
 
-        GeronimoTransactionWrapper(javax.transaction.Transaction transaction) {
+        GeronimoTransactionWrapper(jakarta.transaction.Transaction transaction) {
             super(transaction);
         }
 

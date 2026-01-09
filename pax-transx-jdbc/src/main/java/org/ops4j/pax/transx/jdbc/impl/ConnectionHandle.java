@@ -33,9 +33,9 @@ import java.sql.Struct;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.LocalTransaction;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.LocalTransaction;
 
 import org.ops4j.pax.transx.connection.utils.AbstractConnectionHandle;
 import org.ops4j.pax.transx.connection.utils.AbstractManagedConnection;

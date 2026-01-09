@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.ops4j.pax.transx</groupId>
         <artifactId>pax-transx</artifactId>
-        <version>0.5.5-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -38,6 +38,8 @@
             <groupId>org.ops4j.pax.transx</groupId>
             <artifactId>pax-transx-tm-core</artifactId>
         </dependency>
+
+        <!-- APIs -->
 
         <!-- OSGi -->
 
@@ -63,11 +65,6 @@
         <dependency>
             <groupId>org.jboss.narayana.jta</groupId>
             <artifactId>narayana-jta</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.narayana.osgi</groupId>
-            <artifactId>narayana-osgi-jta</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -120,48 +117,6 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jboss.narayana.osgi</groupId>
-                                    <artifactId>narayana-osgi-jta</artifactId>
-                                    <outputDirectory>${project.build.directory}/embed</outputDirectory>
-                                    <includes>*.jar</includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>${plugin.mojo.build-helper-maven-plugin}</version>
-                <executions>
-                    <execution>
-                        <id>add-resource</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>add-resource</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>${project.build.directory}/embed</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
@@ -169,12 +124,15 @@
                         <Import-Package>
                             !com.arjuna.*,
                             !javax.resource.spi.*,
-                            javax.transaction;version="[1.1,2)",
+                            !javax.transaction,
+                            !org.jboss.tm.*,
+                            !org.jboss.narayana.osgi.jta,
+                            jakarta.transaction;version="[2.0,3)",
                             javax.transaction.xa;version=!,
                             javax.xml.parsers,
                             org.xml.sax,
                             org.xml.sax.helpers,
-                            org.springframework.*;version="[2.5,6)";resolution:=optional,
+                            org.springframework.*;version="[6,7)";resolution:=optional,
                             org.apache.karaf.shell.*;resolution:=optional,
                             <!-- imports collected from the closure of embedded dependencies -->
                             javax.crypto,
@@ -194,6 +152,12 @@
                             com.ning.compress;resolution:=optional,
                             com.ning.compress.lzf;resolution:=optional,
                             com.ning.compress.lzf.util;resolution:=optional,
+                            com.arjuna.common.util.propertyservice;resolution:=optional,
+                            com.arjuna.ats.internal.jta.transaction.arjunacore;resolution:=mandatory,
+                            com.arjuna.ats.arjuna.tools.osb.mbean;resolution:=mandatory,
+                            com.arjuna.ats.arjuna.exceptions;resolution:=mandatory,
+                            com.arjuna.ats.jta.common;resolution:=optional,
+                            com.arjuna.ats.jbossatx.jta;resolution:=optional,
                             org.slf4j;resolution:=optional,
                             org.slf4j.helpers;resolution:=optional,
                             org.slf4j.spi;resolution:=optional,
@@ -202,25 +166,24 @@
                             *
                         </Import-Package>
                         <Export-Package>
-                            org.jboss.narayana.osgi;-split-package:=merge-first,
-                            org.jboss.tm.*;-split-package:=merge-first
+                            org.jboss.tm.*;-split-package:=merge-first,
+                            org.jboss.narayana.osgi.jta
                         </Export-Package>
                         <Private-Package>
-                            org.jboss.narayana.osgi.*;-split-package:=merge-first,
-                            org.ops4j.pax.transx.tm.impl;-split-package:=merge-first
+                            org.ops4j.pax.transx.tm.impl;-split-package:=merge-first,
+                            org.jboss.narayana.osgi.jta.internal;-split-package:=merge-first
                         </Private-Package>
                         <Bundle-Activator>
                             org.jboss.narayana.osgi.jta.internal.Activator
                         </Bundle-Activator>
-                        <Karaf-Commands>
-                            org.jboss.narayana.osgi.jta.command
-                        </Karaf-Commands>
+                        <!-- No Karaf commands provided in this bundle -->
                         <Provide-Capability>
-                            osgi.service;objectClass="javax.transaction.TransactionManager",
-                            osgi.service;objectClass="javax.transaction.TransactionSynchronizationRegistry",
-                            osgi.service;objectClass="javax.transaction.UserTransaction",
+                            osgi.service;objectClass="jakarta.transaction.TransactionManager",
+                            osgi.service;objectClass="jakarta.transaction.TransactionSynchronizationRegistry",
+                            osgi.service;objectClass="jakarta.transaction.UserTransaction",
                             osgi.service;objectClass="org.ops4j.pax.transx.tm.TransactionManager",
                             osgi.service;objectClass="org.springframework.transaction.PlatformTransactionManager"
+                            osgi.service;objectClass="org.jboss.narayana.osgi.jta.ObjStoreBrowserService"
                         </Provide-Capability>
                         <Include-Resource>
                             {maven-resources}

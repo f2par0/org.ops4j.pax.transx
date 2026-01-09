@@ -16,7 +16,7 @@
 package org.ops4j.pax.transx.connector.impl;
 
 import java.util.Objects;
-import javax.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ConnectionRequestInfo;
 import javax.security.auth.Subject;
 
 public class SubjectCRIKey {

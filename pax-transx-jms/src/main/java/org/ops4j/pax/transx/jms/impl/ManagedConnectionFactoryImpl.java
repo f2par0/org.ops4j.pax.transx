@@ -16,13 +16,13 @@
 package org.ops4j.pax.transx.jms.impl;
 
 import java.io.PrintWriter;
-import javax.jms.ConnectionFactory;
-import javax.jms.Session;
-import javax.jms.XAConnectionFactory;
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionManager;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.ManagedConnection;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.Session;
+import jakarta.jms.XAConnectionFactory;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ConnectionManager;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ManagedConnection;
 import javax.security.auth.Subject;
 
 import org.ops4j.pax.transx.connection.ExceptionSorter;

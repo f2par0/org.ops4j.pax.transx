@@ -17,10 +17,10 @@ package org.ops4j.pax.transx.jdbc.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.resource.ResourceException;
-import javax.resource.spi.LocalTransaction;
-import javax.resource.spi.LocalTransactionException;
-import javax.resource.spi.ResourceAdapterInternalException;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.LocalTransaction;
+import jakarta.resource.spi.LocalTransactionException;
+import jakarta.resource.spi.ResourceAdapterInternalException;
 
 import org.ops4j.pax.transx.connection.ExceptionSorter;
 import org.ops4j.pax.transx.connection.utils.AbstractManagedConnection;

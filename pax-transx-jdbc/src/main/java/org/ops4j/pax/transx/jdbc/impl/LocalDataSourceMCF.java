@@ -17,10 +17,10 @@ package org.ops4j.pax.transx.jdbc.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.ManagedConnection;
-import javax.resource.spi.ResourceAdapterInternalException;
+import jakarta.resource.ResourceException;
+import jakarta.resource.spi.ConnectionRequestInfo;
+import jakarta.resource.spi.ManagedConnection;
+import jakarta.resource.spi.ResourceAdapterInternalException;
 import javax.security.auth.Subject;
 import javax.sql.DataSource;
 

@@ -18,7 +18,7 @@ package org.jboss.narayana.osgi.jta.internal;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-import javax.transaction.TransactionManager;
+import jakarta.transaction.TransactionManager;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
@@ -120,7 +120,7 @@ public class TransactionManagerWrapper extends AbstractTransactionManagerWrapper
     }
 
     @Override
-    protected TransactionWrapper doCreateTransactionWrapper(javax.transaction.Transaction tx) {
+    protected TransactionWrapper doCreateTransactionWrapper(jakarta.transaction.Transaction tx) {
         return new NarayanaTransactionWrapper(tx);
     }
 
@@ -129,7 +129,7 @@ public class TransactionManagerWrapper extends AbstractTransactionManagerWrapper
         NamedResource original;
         NamedResource wrapped;
 
-        NarayanaTransactionWrapper(javax.transaction.Transaction transaction) {
+        NarayanaTransactionWrapper(jakarta.transaction.Transaction transaction) {
             super(transaction);
         }
 

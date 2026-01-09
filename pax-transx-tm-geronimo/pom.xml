@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.ops4j.pax.transx</groupId>
         <artifactId>pax-transx</artifactId>
-        <version>0.5.5-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -37,6 +37,14 @@
         <dependency>
             <groupId>org.ops4j.pax.transx</groupId>
             <artifactId>pax-transx-tm-core</artifactId>
+        </dependency>
+
+        <!-- APIs -->
+
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- OSGi -->
@@ -115,8 +123,8 @@
                                 In theory it works - it allows to run the bundle without a need for separate JCA API bundle
                                 but it'd be better to remove the private-packaged XATerminator interface
                             -->
-                            javax.resource.spi;version="[1.6,2)";resolution:=optional,
-                            javax.transaction;version="[1.1,2)",
+                            jakarta.resource.spi;version="[2,3)";resolution:=optional,
+                            jakarta.transaction;version="[2.0,3)",
                             javax.transaction.xa;version=!,
                             *
                         </Import-Package>
@@ -137,9 +145,9 @@
                             org.ops4j.pax.transx.tm.impl.geronimo.Activator
                         </Bundle-Activator>
                         <Provide-Capability>
-                            osgi.service;objectClass="javax.transaction.TransactionManager",
-                            osgi.service;objectClass="javax.transaction.TransactionSynchronizationRegistry",
-                            osgi.service;objectClass="javax.transaction.UserTransaction",
+                            osgi.service;objectClass="jakarta.transaction.TransactionManager",
+                            osgi.service;objectClass="jakarta.transaction.TransactionSynchronizationRegistry",
+                            osgi.service;objectClass="jakarta.transaction.UserTransaction",
                             osgi.service;objectClass="org.ops4j.pax.transx.tm.TransactionManager",
                             osgi.service;objectClass="org.springframework.transaction.PlatformTransactionManager"
                         </Provide-Capability>
