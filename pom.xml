@@ -549,22 +549,7 @@
             </dependency>
             <dependency>
                 <groupId>org.ops4j.pax.swissbox</groupId>
-                <artifactId>pax-swissbox-bnd</artifactId>
-                <version>${version.org.ops4j.pax.swissbox}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.swissbox</groupId>
                 <artifactId>pax-swissbox-core</artifactId>
-                <version>${version.org.ops4j.pax.swissbox}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.swissbox</groupId>
-                <artifactId>pax-swissbox-lifecycle</artifactId>
-                <version>${version.org.ops4j.pax.swissbox}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ops4j.pax.swissbox</groupId>
-                <artifactId>pax-swissbox-property</artifactId>
                 <version>${version.org.ops4j.pax.swissbox}</version>
             </dependency>
             <dependency>

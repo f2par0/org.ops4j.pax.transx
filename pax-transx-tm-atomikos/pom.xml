@@ -116,7 +116,7 @@
                             jakarta.transaction;version="[2.0,3)",
                             javax.transaction.xa;version=!,
                             jakarta.jms;resolution:=optional,
-                            jakarta.sql;resolution:=optional,
+                            javax.sql;resolution:=optional,
                             org.slf4j;resolution:=optional,
                             jakarta.management;resolution:=optional,
                             org.apache.log4j;resolution:=optional,

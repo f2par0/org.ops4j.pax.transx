@@ -129,8 +129,6 @@ public class AbstractControlledTestBase {
                 linkBundle("org.apache.servicemix.bundles.javax-inject").startLevel(START_LEVEL_SYSTEM_BUNDLES),
 
                 junitBundles(),
-                //systemProperty("java.protocol.handler.pkgs").value("org.ops4j.pax.url"),
-                systemProperty("pax.exam.osgi.unresolved.fail").value("false"),
                 mavenBundle("org.mockito", "mockito-core")
                         .versionAsInProject().startLevel(START_LEVEL_TEST_BUNDLE - 1),
                 mavenBundle("net.bytebuddy", "byte-buddy")

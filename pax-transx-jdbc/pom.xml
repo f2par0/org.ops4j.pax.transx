@@ -118,11 +118,6 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>javax.transaction-api</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <!-- Logging dependencies -->
 
