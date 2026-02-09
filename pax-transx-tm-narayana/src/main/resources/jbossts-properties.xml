@@ -85,10 +85,6 @@
     <!-- default is under user.home - must be writeable!) -->
     <entry key="ObjectStoreEnvironmentBean.objectStoreDir"></entry>
 
-    <entry key="ObjectStoreEnvironmentBean.objectStoreType">
-        com.arjuna.ats.internal.arjuna.objectstore.hornetq.HornetqObjectStoreAdaptor
-    </entry>
-
     <!-- (default is ON) -->
     <entry key="ObjectStoreEnvironmentBean.transactionSync">ON</entry>
 

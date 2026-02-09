@@ -39,8 +39,6 @@
             <artifactId>pax-transx-tm-core</artifactId>
         </dependency>
 
-        <!-- APIs -->
-
         <!-- OSGi -->
 
         <dependency>
@@ -129,6 +127,7 @@
                             !org.jboss.narayana.osgi.jta,
                             jakarta.transaction;version="[2.0,3)",
                             javax.transaction.xa;version=!,
+                            jakarta.resource.spi;version="[2,3)",
                             javax.xml.parsers,
                             org.xml.sax,
                             org.xml.sax.helpers,
@@ -152,17 +151,13 @@
                             com.ning.compress;resolution:=optional,
                             com.ning.compress.lzf;resolution:=optional,
                             com.ning.compress.lzf.util;resolution:=optional,
-                            com.arjuna.common.util.propertyservice;resolution:=optional,
-                            com.arjuna.ats.internal.jta.transaction.arjunacore;resolution:=mandatory,
-                            com.arjuna.ats.arjuna.tools.osb.mbean;resolution:=mandatory,
-                            com.arjuna.ats.arjuna.exceptions;resolution:=mandatory,
-                            com.arjuna.ats.jta.common;resolution:=optional,
-                            com.arjuna.ats.jbossatx.jta;resolution:=optional,
                             org.slf4j;resolution:=optional,
                             org.slf4j.helpers;resolution:=optional,
                             org.slf4j.spi;resolution:=optional,
                             sun.misc;resolution:=optional,
                             sun.nio.ch;resolution:=optional,
+                            android.os;resolution:=optional,
+                            org.apache.activemq.artemis.core.*;resolution:=optional,
                             *
                         </Import-Package>
                         <Export-Package>
@@ -172,11 +167,49 @@
                         <Private-Package>
                             org.ops4j.pax.transx.tm.impl;-split-package:=merge-first,
                             org.jboss.narayana.osgi.jta.internal;-split-package:=merge-first
+                            com.arjuna.ats;-split-package:=merge-first,
+                            com.arjuna.ats.common,
+                            com.arjuna.ats.jta.common,
+                            com.arjuna.ats.jbossatx,
+                            com.arjuna.ats.internal.jbossatx,
+                            com.arjuna.ats.internal.jta.*,
+                            com.arjuna.common.util.propertyservice,
+                            com.arjuna.common.internal.util.propertyservice,
+                            com.arjuna.common.util.*,
+                            com.arjuna.common.logging.*,
+                            com.arjuna.common.internal*,
+                            com.arjuna.ats.jbossatx.jta,
+                            com.arjuna.ats.jbossatx.logging,
+                            com.arjuna.ats.arjuna.recovery,
+                            com.arjuna.ats.internal.arjuna.recovery,
+                            com.arjuna.ats.arjuna.exceptions,
+                            com.arjuna.ats.arjuna.common,
+                            com.arjuna.ats.arjuna.logging,
+                            com.arjuna.ats.jta.exceptions,
+                            com.arjuna.ats.arjuna.coordinator,
+                            com.arjuna.ats.internal.arjuna.objectstore,
+                            com.arjuna.ats.arjuna.objectstore,
+                            com.arjuna.ats.internal.arjuna.coordinator,
+                            com.arjuna.ats.arjuna.tools.osb.mbean,
+                            com.arjuna.ats.arjuna.utils,
+                            com.arjuna.ats.arjuna,
+                            com.arjuna.ats.arjuna.tools.osb.util,
+                            com.arjuna.ats.arjuna.coordinator.abstractrecord,
+                            com.arjuna.ats.internal.jta.recovery.arjunacore,
+                            com.arjuna.ats.jta,
+                            com.arjuna.ats.jta.logging,
+                            com.arjuna.ats.arjuna.state,
+                            com.arjuna.ats.jta.recovery,
+                            com.arjuna.ats.internal.arjuna.abstractrecords,
+                            com.arjuna.ats.jta.resources,
+                            com.arjuna.ats.internal.arjuna.objectstore.hornetq,
+                            com.arjuna.ats.internal.arjuna.common,
+                            com.arjuna.ats.internal.arjuna.utils,
+                            com.arjuna.ats.internal.jbossatx.jta
                         </Private-Package>
                         <Bundle-Activator>
                             org.jboss.narayana.osgi.jta.internal.Activator
                         </Bundle-Activator>
-                        <!-- No Karaf commands provided in this bundle -->
                         <Provide-Capability>
                             osgi.service;objectClass="jakarta.transaction.TransactionManager",
                             osgi.service;objectClass="jakarta.transaction.TransactionSynchronizationRegistry",

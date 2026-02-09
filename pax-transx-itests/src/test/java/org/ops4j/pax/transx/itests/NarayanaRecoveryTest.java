@@ -15,6 +15,9 @@
  */
 package org.ops4j.pax.transx.itests;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -58,11 +61,19 @@ public class NarayanaRecoveryTest extends AbstractControlledTestBase {
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-connector").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-jms").versionAsInProject(),
                 mavenBundle("org.ops4j.pax.transx", "pax-transx-jdbc").versionAsInProject(),
-                wrappedBundle(mavenBundle("org.jboss.narayana.jta", "narayana-jta").versionAsInProject()),
-                wrappedBundle(mavenBundle("org.jboss.narayana.jts", "narayana-jts-integration").versionAsInProject()),
-                systemProperty("com.arjuna.ats.arjuna.recovery.periodicRecoveryInitilizationOffset").value("1"),
-                systemProperty("com.arjuna.ats.arjuna.hornetqjournal.asyncIO").value("false")
+                systemProperty("ObjectStoreEnvironmentBean.objectStoreDir") .value(createTempDir()),
+                systemProperty("com.arjuna.ats.arjuna.recovery.periodicRecoveryInitilizationOffset").value("1")
         );
+    }
+
+    private static String createTempDir() {
+        try {
+            Path tempDir = Files.createTempDirectory("narayana-txlog-");
+            tempDir.toFile().deleteOnExit();
+            return tempDir.toAbsolutePath().toString();
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create temp directory", e);
+        }
     }
 
     @Test

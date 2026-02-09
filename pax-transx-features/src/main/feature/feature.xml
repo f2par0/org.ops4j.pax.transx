@@ -56,8 +56,7 @@
 
     <feature name="pax-transx-tm-narayana" version="${project.version}">
         <feature>pax-transx-tm-api</feature>
-        <bundle dependency="true">wrap:mvn:org.jboss.narayana.jta/narayana-jta/${version.org.jboss.narayana}</bundle>
-        <bundle dependency="true">wrap:mvn:org.jboss.narayana.jts/narayana-jts-integration/${version.org.jboss.narayana}</bundle>
+        <bundle dependency="true">mvn:jakarta.resource/jakarta.resource-api/${version.jakarta.resource}</bundle>
         <bundle>mvn:org.ops4j.pax.transx/pax-transx-tm-narayana/${project.version}</bundle>
     </feature>
 
